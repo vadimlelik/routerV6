@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route, Navigate } from "react-router-dom";
+import Layout from './components/Layout';
+
+import About from './pages/About';
+import BlogPage from './pages/BlogPage';
+import HomePage from './pages/HomePage';
+import NotFioundPage from './pages/NotFoundPage';
+import PageEdite from './pages/PageEit';
+import SinglePage from './pages/SindglePage';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <Routes>
+        <Route path='/' element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path='about' element={<About />} />
+          <Route path='about-us' element={<Navigate to='/about' replace />} />
+          <Route path='posts' element={<BlogPage />} />
+          <Route path='posts/:id' element={<SinglePage />} />
+          <Route path='posts/:id/edit' element={<PageEdite />} />
+          <Route path='*' element={<NotFioundPage />} />
+        </Route>
+      </Routes>
     </div>
   );
 }
